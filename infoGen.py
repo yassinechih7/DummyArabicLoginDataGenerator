@@ -2,6 +2,7 @@ import random
 import csv
 import string
 import time
+import datetime
 import configparser
 
 class Person:
@@ -13,6 +14,7 @@ class Person:
 		self.email = genEmail(self.fullname, "outlook.com")
 		self.password = get_random_string(12)
 		self.address = genAdress()
+		self.birthdate = getRandomDate()
 
 def genName():
 	fileName = "Data/names.csv"
@@ -40,6 +42,15 @@ def genAdress():
 
 		return fullAdress
 
+# Return YYYY-MM-DD
+def getRandomDate():
+	# Using datetime.date to parse random int
+	year = random.randint(1980, 1999)
+	mounth = random.randint(1, 12)
+	day = random.randint(1, 30)
+	date=datetime.date(year, mounth, day)
+	return date
+
 # Random String generator
 def get_random_string(length):
 	# choose from all lowercase letter
@@ -59,7 +70,8 @@ def genConfig():
 			"lastName": p.lastname,
 			"email": p.email,
 			"password": p.password,
-			"address": p.address
+			"address": p.address,
+			"birthDate": p.birthdate
 	}
 	with open('info.ini', 'a+') as configfile:
 		config.write(configfile)

@@ -75,5 +75,5 @@ def genConfig():
 	}
 	with open('info.ini', 'a+') as configfile:
 		config.write(configfile)
-
-genConfig()
+if __name__ == "__main__":
+	genConfig()
